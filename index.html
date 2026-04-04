@@ -711,7 +711,7 @@
       </button>
       <div id="form-status"></div>
       <p class="form-note">Your details will be shared with the BNC Elevate team only. No spam, ever.<br>
-        For corporate enquiries: <a href="mailto:summit@bncdataprivacy.com" style="color:var(--gold)">summit@bncdataprivacy.com</a> | +91 9810 575613</p>
+        For corporate enquiries: <a href="/cdn-cgi/l/email-protection#186b6d7575716c587a767b7c796c79686a716e797b61367b7775" style="color:var(--gold)"><span class="__cf_email__" data-cfemail="087b7d6565617c486a666b6c697c69787a617e696b71266b6765">[email&#160;protected]</span></a> | +91 9810 575613</p>
     </div>
   </div>
 </section>
@@ -724,7 +724,7 @@
       <p class="footer-desc">BNC Data Privacy Labs | Elevate by BnC Global — India's trusted DPDP Act training partner. Headquartered in New Delhi with presence in the UK and Middle East.</p>
       <div class="footer-contact">
         <a href="tel:+919810575613">+91 9810 575613</a>
-        <a href="mailto:summit@bncdataprivacy.com">summit@bncdataprivacy.com</a>
+        <a href="/cdn-cgi/l/email-protection#c2b1b7afafabb682a0aca1a6a3b6a3b2b0abb4a3a1bbeca1adaf"><span class="__cf_email__" data-cfemail="85f6f0e8e8ecf1c5e7ebe6e1e4f1e4f5f7ecf3e4e6fcabe6eae8">[email&#160;protected]</span></a>
         <a href="#">208, DDA 5, Janakpuri District Centre, New Delhi</a>
       </div>
       <div class="footer-social">
@@ -754,7 +754,7 @@
         <li><a href="#audiences">Who It's For</a></li>
         <li><a href="#why">Why BNC</a></li>
         <li><a href="#register">Register Now</a></li>
-        <li><a href="mailto:summit@bncdataprivacy.com">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#34474159595d4074565a575055405544465d4255574d1a575b59">Contact Us</a></li>
         <li><a href="https://www.bncdataprivacy.com" target="_blank">www.bncdataprivacy.com</a></li>
       </ul>
     </div>
@@ -766,56 +766,55 @@
 </footer>
 
 <script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNcBtiBnqGxTJstkFB66vYfXc5n8MKE7ifSFiGCAADlEWMEvCGBCXtgHB6Y3pkGJwwIg/exec";
+
 async function submitForm() {
-  const btn = document.getElementById('submit-btn');
-  const status = document.getElementById('form-status');
+  const btn    = document.getElementById("submit-btn");
+  const status = document.getElementById("form-status");
 
-  const name = document.getElementById('name').value.trim();
-  const contact = document.getElementById('contact').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const occupation = document.getElementById('occupation').value.trim();
-  const training = document.getElementById('training').value;
+  const fields = {
+    name:       document.getElementById("name").value.trim(),
+    contact:    document.getElementById("contact").value.trim(),
+    email:      document.getElementById("email").value.trim(),
+    address:    document.getElementById("address").value.trim(),
+    occupation: document.getElementById("occupation").value.trim(),
+    training:   document.getElementById("training").value
+  };
 
-  if (!name || !contact || !email || !training) {
-    status.innerHTML = '<span class="status-error">Please fill in all required fields (*)</span>';
+  if (!fields.name || !fields.contact || !fields.email || !fields.training) {
+    status.innerHTML = "<span class=\"status-error\">Please fill in all required fields *</span>";
+    return;
+  }
+
+  if (APPS_SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
+    status.innerHTML = "<span class=\"status-error\">Sheet not connected yet. See setup guide below.</span>";
     return;
   }
 
   btn.disabled = true;
-  btn.textContent = 'Submitting...';
-  status.innerHTML = '<span class="status-loading">Sending your registration…</span>';
+  btn.textContent = "Sending…";
+  status.innerHTML = "<span class=\"status-loading\">Submitting your registration…</span>";
 
-  // Google Apps Script Web App URL
-  const SCRIPT_URL = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbxLuUT73j-k0bILnMSXTEg1ZohaT3Ij6WzRHDyIs-zgCe42jF4_jp9x2CICklTArVtiAQ/exec/exec';
-
-  const formData = new FormData();
-  formData.append('Name', name);
-  formData.append('Contact', contact);
-  formData.append('Email', email);
-  formData.append('Address', address);
-  formData.append('Occupation', occupation);
-  formData.append('Training_Type', training);
-  formData.append('Timestamp', new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'}));
+  const body = Object.entries(fields)
+    .map(([k,v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
+    .join("&");
 
   try {
-    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: formData });
-    if (resp.ok || resp.type === 'opaque') {
-      status.innerHTML = '<span class="status-success">✓ Registration received! Our team will contact you shortly with batch details.</span>';
-      document.getElementById('name').value = '';
-      document.getElementById('contact').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('address').value = '';
-      document.getElementById('occupation').value = '';
-      document.getElementById('training').value = '';
-      btn.textContent = 'Registration Sent ✓';
-    } else {
-      throw new Error('Response error');
-    }
-  } catch (e) {
-    // Fallback: still show success as form data was sent (no-cors)
-    status.innerHTML = '<span class="status-success">✓ Registration received! Our team will contact you shortly.</span>';
-    btn.textContent = 'Registration Sent ✓';
+    await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+    status.innerHTML = "<span class=\"status-success\">Registration received! Our team will contact you shortly.</span>";
+    btn.textContent  = "Registration Sent ✓";
+    btn.style.background = "#4caf50";
+    ["name","contact","email","address","occupation"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("training").value = "";
+  } catch (err) {
+    status.innerHTML = "<span class=\"status-error\">Error. Email us: summit@bncdataprivacy.com</span>";
+    btn.disabled = false;
+    btn.textContent = "Submit Registration →";
   }
 }
 </script>
