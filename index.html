@@ -4,615 +4,366 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elevate by BNC | DPDP Act Training</title>
+<link rel="icon" type="image/webp" href="logo.webp">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #000000;
-    --off-black: #0a0a0a;
-    --dark: #111111;
-    --card-bg: #141414;
-    --gold: #b8952a;
-    --gold-light: #d4af5a;
-    --gold-pale: #f0d890;
-    --silver: #8a9bb0;
-    --silver-light: #b0bec5;
-    --white: #ffffff;
-    --text-muted: #888888;
-    --border: #222222;
-    --penalty-red: #cc3333;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* ──────── NAV ──────── */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 18px 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(184,149,42,0.15);
-  }
-  .nav-logo img { height: 48px; width: auto; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--silver-light); text-decoration: none;
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    background: var(--gold); color: var(--black);
-    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 10px 22px; border: none; cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-  }
-  .nav-cta:hover { background: var(--gold-light); }
-
-  /* ──────── HERO ──────── */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    padding: 100px 5% 60px;
-    background:
-      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(184,149,42,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(138,155,176,0.04) 0%, transparent 60%),
-      var(--black);
-  }
-
-  .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 60px; align-items: center; max-width: 1200px; width: 100%;
-  }
-
-  .hero-tag {
-    display: inline-block;
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(184,149,42,0.3);
-    padding: 6px 16px; margin-bottom: 28px;
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 6vw, 80px);
-    font-weight: 600; line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-  .hero h1 span { color: var(--gold); font-style: italic; }
-
-  .hero-subtitle {
-    font-size: 15px; color: var(--silver-light);
-    line-height: 1.75; margin: 20px 0 36px;
-    max-width: 480px;
-  }
-
-  .hero-penalty {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: rgba(204,51,51,0.08); border-left: 3px solid var(--penalty-red);
-    padding: 14px 20px; margin-bottom: 36px;
-  }
-  .hero-penalty-num {
-    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
-    color: var(--penalty-red);
-  }
-  .hero-penalty-text { font-size: 13px; color: var(--silver-light); line-height: 1.4; }
-
-  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--gold); color: var(--black);
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 14px 32px; border: none; cursor: pointer;
-    transition: all 0.3s; text-decoration: none; display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent; color: var(--silver-light);
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 13px 32px; border: 1px solid rgba(138,155,176,0.3); cursor: pointer;
-    transition: all 0.3s; text-decoration: none; display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-right {
-    display: flex; flex-direction: column; gap: 20px;
-  }
-  .stat-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    padding: 24px 28px;
-    border-left: 3px solid var(--gold);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px; font-weight: 700; color: var(--gold-light);
-    line-height: 1;
-  }
-  .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
-
-  .hero-law-note {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold); text-align: center;
-    padding: 12px; border: 1px solid rgba(184,149,42,0.2);
-    background: rgba(184,149,42,0.04);
-  }
-
-  /* ──────── SECTION WRAPPER ──────── */
-  section { padding: 90px 5%; }
-  .section-label {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 16px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px); font-weight: 600;
-    line-height: 1.1; color: var(--white);
-    margin-bottom: 20px;
-  }
-  .section-title em { color: var(--gold); font-style: italic; }
-  .section-desc { font-size: 15px; color: var(--silver-light); line-height: 1.8; max-width: 580px; }
-  .divider { width: 60px; height: 2px; background: var(--gold); margin: 24px 0; }
-
-  /* ──────── AUDIENCES ──────── */
-  #audiences { background: var(--off-black); }
-  .audiences-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2px; margin-top: 50px;
-  }
-  .audience-card {
-    background: var(--card-bg); padding: 40px 32px;
-    border-top: 3px solid var(--border);
-    transition: border-color 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .audience-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.4s;
-  }
-  .audience-card:hover::before { transform: scaleX(1); }
-  .audience-icon { font-size: 32px; margin-bottom: 20px; }
-  .audience-tag {
-    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 12px;
-  }
-  .audience-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px; font-weight: 600; color: var(--white);
-    margin-bottom: 12px; line-height: 1.2;
-  }
-  .audience-hook {
-    font-size: 13px; color: var(--gold-light); font-style: italic;
-    margin-bottom: 18px; line-height: 1.5;
-  }
-  .audience-card p { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
-  .audience-outcomes { margin-top: 20px; }
-  .audience-outcomes li {
-    font-size: 13px; color: var(--silver-light);
-    padding: 6px 0; border-bottom: 1px solid var(--border);
-    list-style: none; padding-left: 16px; position: relative;
-  }
-  .audience-outcomes li::before {
-    content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 11px;
-  }
-
-  /* ──────── FORMATS ──────── */
-  #formats { background: var(--black); }
-  .formats-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-  .format-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    padding: 40px; position: relative;
-  }
-  .format-badge {
-    position: absolute; top: 24px; right: 24px;
-    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    background: var(--gold); color: var(--black);
-    padding: 4px 12px;
-  }
-  .format-duration {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 56px; font-weight: 300; color: var(--gold);
-    line-height: 1;
-  }
-  .format-card h3 {
-    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--white); margin: 8px 0 20px;
-  }
-  .format-for {
-    font-size: 13px; color: var(--text-muted);
-    border-left: 2px solid var(--gold); padding-left: 14px; margin-bottom: 24px;
-    line-height: 1.6;
-  }
-  .module-list { list-style: none; }
-  .module-list li {
-    display: flex; gap: 14px; align-items: flex-start;
-    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  .module-time {
-    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 600;
-    color: var(--gold); white-space: nowrap; padding-top: 2px; min-width: 70px;
-  }
-  .module-title { font-size: 13px; color: var(--silver-light); line-height: 1.5; }
-  .deliverables {
-    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
-  }
-  .deliverables-label {
-    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 12px;
-  }
-  .deliverables-list { display: flex; flex-wrap: wrap; gap: 8px; }
-  .del-tag {
-    font-size: 11px; color: var(--gold-light);
-    border: 1px solid rgba(184,149,42,0.2); padding: 4px 10px;
-    background: rgba(184,149,42,0.04);
-  }
-
-  /* ──────── WHY BNC ──────── */
-  #why { background: var(--off-black); }
-  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
-  .why-stat {
-    background: var(--card-bg); padding: 28px;
-    border-bottom: 2px solid var(--gold);
-  }
-  .why-stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 700; color: var(--gold-light); line-height: 1;
-  }
-  .why-stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
-  .why-points { list-style: none; margin-top: 28px; }
-  .why-points li {
-    padding: 14px 0; border-bottom: 1px solid var(--border);
-    font-size: 14px; color: var(--silver-light); line-height: 1.6;
-    padding-left: 24px; position: relative;
-  }
-  .why-points li::before {
-    content: '◆'; position: absolute; left: 0;
-    color: var(--gold); font-size: 8px; top: 18px;
-  }
-
-  /* ──────── REGISTER FORM ──────── */
-  #register {
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,149,42,0.07) 0%, transparent 70%),
-      var(--black);
-  }
-  .form-wrap { max-width: 700px; margin: 50px auto 0; }
-  .form-header { text-align: center; margin-bottom: 40px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: var(--card-bg); border: 1px solid var(--border);
-    color: var(--white); padding: 14px 16px;
-    font-family: 'Inter', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.3s;
-    appearance: none; -webkit-appearance: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus { border-color: var(--gold); }
-  .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-  .form-group select option { background: var(--dark); }
-
-  .form-submit {
-    margin-top: 28px; width: 100%;
-    background: var(--gold); color: var(--black);
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 18px; border: none; cursor: pointer;
-    transition: all 0.3s;
-  }
-  .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  #form-status {
-    margin-top: 16px; text-align: center;
-    font-size: 14px; min-height: 20px;
-  }
-  .status-success { color: #4caf50; }
-  .status-error { color: var(--penalty-red); }
-  .status-loading { color: var(--gold); }
-
-  .form-note {
-    text-align: center; margin-top: 14px;
-    font-size: 12px; color: var(--text-muted); line-height: 1.6;
-  }
-
-  /* ──────── FOOTER ──────── */
-  footer {
-    background: var(--off-black);
-    border-top: 1px solid var(--border);
-    padding: 50px 5% 30px;
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px; margin-bottom: 40px;
-  }
-  footer img { height: 44px; margin-bottom: 16px; }
-  .footer-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; max-width: 300px; }
-  .footer-contact { margin-top: 16px; }
-  .footer-contact a {
-    display: block; font-size: 13px; color: var(--silver-light);
-    text-decoration: none; margin-bottom: 6px; transition: color 0.3s;
-  }
-  .footer-contact a:hover { color: var(--gold); }
-
-  .footer-col h4 {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 20px;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul li a {
-    font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.3s;
-  }
-  .footer-col ul li a:hover { color: var(--silver-light); }
-
-  .footer-social { display: flex; gap: 14px; margin-top: 20px; }
-  .social-link {
-    width: 38px; height: 38px;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-muted); text-decoration: none;
-    transition: all 0.3s; font-size: 15px;
-  }
-  .social-link:hover { border-color: var(--gold); color: var(--gold); }
-
-  .footer-bottom {
-    padding-top: 24px; border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-bottom p { font-size: 12px; color: var(--text-muted); }
-
-  /* ──────── ANIMATIONS ──────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-up { animation: fadeUp 0.8s ease both; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.25s; }
-  .delay-3 { animation-delay: 0.4s; }
-
-  /* ──────── RESPONSIVE ──────── */
-  @media (max-width: 900px) {
-    .hero-grid, .formats-wrap, .why-grid, .footer-grid { grid-template-columns: 1fr; }
-    .audiences-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-group.full { grid-column: 1; }
-    nav { padding: 14px 5%; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 5% 60px; }
-    .footer-grid { gap: 36px; }
-    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  :root{--black:#000;--off:#0a0a0a;--card:#141414;--gold:#b8952a;--gold-l:#d4af5a;--silver:#b0bec5;--white:#fff;--muted:#888;--border:#222;--red:#cc3333;--green:#4caf50}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,149,42,0.15)}
+  .nav-logo img{height:46px;width:auto;object-fit:contain}
+  .nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+  .nav-links a{color:var(--silver);text-decoration:none;font-family:'Syne',sans-serif;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .3s}
+  .nav-links a:hover{color:var(--gold-l)}
+  .nav-pay{background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border:none;cursor:pointer;text-decoration:none;transition:background .3s;display:inline-block}
+  .nav-pay:hover{background:var(--gold-l)}
+  /* SECTIONS */
+  section{padding:86px 5%}
+  .max{max-width:1200px;margin:0 auto}
+  .lbl{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+  .ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:600;line-height:1.1;margin-bottom:16px}
+  .ttl em{color:var(--gold);font-style:italic}
+  .div{width:56px;height:2px;background:var(--gold);margin:18px 0}
+  .desc{font-size:14px;color:var(--silver);line-height:1.8;max-width:560px}
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 5% 60px;background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(184,149,42,.06) 0%,transparent 70%),var(--black)}
+  .h-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1200px;width:100%}
+  .h-tag{display:inline-block;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,149,42,.3);padding:6px 16px;margin-bottom:26px}
+  .h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,76px);font-weight:600;line-height:1.05;margin-bottom:12px}
+  .h-title span{color:var(--gold);font-style:italic}
+  .h-sub{font-size:15px;color:var(--silver);line-height:1.75;margin:18px 0 26px;max-width:480px}
+  .pen{display:inline-flex;align-items:center;gap:14px;background:rgba(204,51,51,.08);border-left:3px solid var(--red);padding:14px 20px;margin-bottom:30px}
+  .pen-n{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--red);line-height:1}
+  .pen-t{font-size:12px;color:var(--silver);line-height:1.5}
+  .btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-g{background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s}
+  .btn-g:hover{background:var(--gold-l);transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--silver);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border:1px solid rgba(138,155,176,.3);cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s}
+  .btn-o:hover{border-color:var(--gold);color:var(--gold)}
+  .h-r{display:flex;flex-direction:column;gap:18px}
+  .sc{background:var(--card);border:1px solid var(--border);padding:22px 26px;border-left:3px solid var(--gold)}
+  .sc-n{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;color:var(--gold-l);line-height:1}
+  .sc-l{font-size:12px;color:var(--muted);margin-top:5px}
+  .ln{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:center;padding:12px;border:1px solid rgba(184,149,42,.2);background:rgba(184,149,42,.04)}
+  /* AUDIENCES */
+  #audiences{background:var(--off)}
+  .a-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px}
+  .ac{background:var(--card);padding:34px 26px;position:relative;overflow:hidden;border-top:3px solid var(--border)}
+  .ac::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .ac:hover::before{transform:scaleX(1)}
+  .ac-ico{font-size:28px;margin-bottom:16px}
+  .ac-tag{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+  .ac h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:10px;line-height:1.2}
+  .ac-hook{font-size:12px;color:var(--gold-l);font-style:italic;margin-bottom:12px;line-height:1.5}
+  .ac p{font-size:13px;color:var(--muted);line-height:1.75}
+  .ac-out{margin-top:16px;list-style:none}
+  .ac-out li{font-size:12px;color:var(--silver);padding:5px 0 5px 16px;border-bottom:1px solid var(--border);position:relative}
+  .ac-out li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:11px}
+  .dl-btn{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:10px 16px;background:rgba(184,149,42,.08);border:1px solid rgba(184,149,42,.35);color:var(--gold-l);text-decoration:none;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .3s}
+  .dl-btn:hover{background:rgba(184,149,42,.18);border-color:var(--gold);color:var(--gold)}
+  /* PRICING */
+  #pricing{background:var(--black)}
+  .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:44px}
+  .pc{background:var(--card);border:1px solid var(--border);padding:38px;position:relative}
+  .pc.feat{border-color:var(--gold)}
+  .pc-badge{position:absolute;top:-1px;right:26px;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:5px 14px}
+  .pc-amt{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:var(--gold-l);line-height:1}
+  .pc-str{font-size:20px;color:var(--muted);text-decoration:line-through;margin-left:8px}
+  .pc-ttl{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--white);margin:8px 0 16px}
+  .pc-feat{list-style:none}
+  .pc-feat li{font-size:13px;color:var(--silver);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);padding-left:18px;position:relative}
+  .pc-feat li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-size:12px}
+  .batch-tag{display:inline-block;margin-top:18px;background:rgba(204,51,51,.1);border:1px solid rgba(204,51,51,.3);color:#e57373;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px}
+  /* PAYMENT */
+  #payment{background:var(--off)}
+  .pay-wrap{max-width:680px;margin:44px auto 0;text-align:center}
+  .qr-fr{background:white;display:inline-block;padding:18px;margin:26px 0;border:4px solid var(--gold)}
+  .qr-fr img{display:block;width:250px;height:auto}
+  .upi{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:.08em;color:var(--gold-l);margin:10px 0}
+  .pay-steps{text-align:left;margin:22px 0}
+  .ps{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+  .psn{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pst{font-size:13px;color:var(--silver);line-height:1.6}
+  .pst strong{color:var(--white)}
+  .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:white;text-decoration:none;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:16px 30px;transition:all .3s;margin-top:8px}
+  .wa-btn:hover{background:#1ebe5d;transform:translateY(-2px)}
+  .pay-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.7}
+  /* CURRICULUM */
+  #curriculum{background:var(--black)}
+  .m-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .mc{background:var(--card);border:1px solid var(--border);padding:26px}
+  .mc-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:rgba(184,149,42,.22);line-height:1;margin-bottom:9px}
+  .mc-t{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+  .mc-d{font-size:13px;color:var(--muted);line-height:1.7}
+  /* WHY */
+  #why{background:var(--off)}
+  .w-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .w-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+  .ws{background:var(--card);padding:22px;border-bottom:2px solid var(--gold)}
+  .ws-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--gold-l);line-height:1}
+  .ws-l{font-size:11px;color:var(--muted);margin-top:5px}
+  .w-pts{list-style:none;margin-top:22px}
+  .w-pts li{padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--silver);line-height:1.6;padding-left:20px;position:relative}
+  .w-pts li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:8px;top:15px}
+  .qb{margin-top:20px;padding:20px;background:var(--card);border-left:3px solid var(--gold)}
+  .qb p{font-size:13px;color:var(--silver);line-height:1.75;font-style:italic}
+  .qb span{display:block;font-size:10px;color:var(--gold);margin-top:10px;font-family:'Syne',sans-serif;letter-spacing:.12em;text-transform:uppercase}
+  /* FORM */
+  #register{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,149,42,.07) 0%,transparent 70%),var(--black)}
+  .f-wrap{max-width:660px;margin:44px auto 0}
+  .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .fg{display:flex;flex-direction:column;gap:7px}
+  .fg.full{grid-column:1/-1}
+  .fg label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .fg input,.fg select{background:var(--card);border:1px solid var(--border);color:var(--white);padding:13px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .3s;appearance:none;-webkit-appearance:none}
+  .fg input:focus,.fg select:focus{border-color:var(--gold)}
+  .fg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+  .fg select option{background:#111}
+  .f-btn{margin-top:22px;width:100%;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:17px;border:none;cursor:pointer;transition:all .3s}
+  .f-btn:hover{background:var(--gold-l);transform:translateY(-2px)}
+  .f-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  #fst{margin-top:12px;text-align:center;font-size:14px;min-height:20px}
+  .ss{color:var(--green)}.se{color:var(--red)}.sl{color:var(--gold)}
+  .f-note{text-align:center;margin-top:10px;font-size:11px;color:var(--muted);line-height:1.7}
+  /* FOOTER */
+  footer{background:var(--off);border-top:1px solid var(--border);padding:44px 5% 24px}
+  .ft-g{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:32px;max-width:1200px;margin:0 auto 32px}
+  footer img.fl{height:42px;margin-bottom:12px}
+  .fd{font-size:12px;color:var(--muted);line-height:1.75;max-width:280px}
+  .fc-c{margin-top:12px}
+  .fc-c a{display:block;font-size:12px;color:var(--silver);text-decoration:none;margin-bottom:5px;transition:color .3s}
+  .fc-c a:hover{color:var(--gold)}
+  .soc{display:flex;gap:10px;margin-top:16px}
+  .sl2{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .3s}
+  .sl2:hover{border-color:var(--gold);color:var(--gold)}
+  .fc h4{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .fc ul{list-style:none}
+  .fc ul li{margin-bottom:8px}
+  .fc ul li a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .3s}
+  .fc ul li a:hover{color:var(--silver)}
+  .fb{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .fb p{font-size:11px;color:var(--muted)}
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .h-grid,.p-grid,.w-grid,.ft-g{grid-template-columns:1fr}
+    .a-grid,.m-grid{grid-template-columns:1fr}
+    .f-grid{grid-template-columns:1fr}
+    .fg.full{grid-column:1}
+    .nav-links{display:none}
+    .hero{padding:90px 5% 50px}
+    #mob-pay{display:inline-block!important}
+    .fb{flex-direction:column;gap:10px;text-align:center}
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <img src="Untitled_Design_-_1.png" alt="Elevate by BNC" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-    <span style="display:none; font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--gold-light);">BNC ELEVATE</span>
-  </div>
+  <div class="nav-logo"><img src="logo.webp" alt="Elevate by BNC"></div>
   <ul class="nav-links">
     <li><a href="#audiences">Who It's For</a></li>
-    <li><a href="#formats">Programmes</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#curriculum">Curriculum</a></li>
     <li><a href="#why">Why BNC</a></li>
     <li><a href="#register">Register</a></li>
+    <li><a href="#payment" class="nav-pay">💳 Pay Now</a></li>
   </ul>
-  <a href="#register" class="nav-cta">Register Now</a>
+  <a href="#payment" class="nav-pay" id="mob-pay" style="display:none;">Pay Now</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid">
-    <div class="fade-up">
-      <div class="hero-tag">DPDP Act 2023 Training</div>
-      <h1>India's Data Law<br>Is <span>Active.</span><br>Are You Ready?</h1>
-      <p class="hero-subtitle">BNC Data Privacy Labs brings India's most trusted DPDP Act training to professionals, freshers, and corporate teams — in 2 hours or 1 day.</p>
-      <div class="hero-penalty">
-        <div class="hero-penalty-num">₹250Cr</div>
-        <div class="hero-penalty-text">Maximum penalty per violation<br>under DPDP Act 2023</div>
+  <div class="h-grid">
+    <div>
+      <div class="h-tag">DPDP Act 2023 — Now In Force</div>
+      <h1 class="h-title">India's Data Law<br>Is <span>Active.</span><br>Are You Ready?</h1>
+      <p class="h-sub">Elevate by BNC brings India's most trusted DPDP Act compliance training to students, professionals, and corporate teams.</p>
+      <div class="pen">
+        <div class="pen-n">₹200Cr</div>
+        <div class="pen-t">Maximum penalty per violation<br><span style="color:var(--red)">under DPDP Act 2023</span></div>
       </div>
-      <div class="hero-btns">
-        <a href="#register" class="btn-primary">Register Now</a>
-        <a href="#formats" class="btn-outline">View Programmes</a>
+      <div class="btns">
+        <a href="#register" class="btn-g">Register Now</a>
+        <a href="#payment" class="btn-o">Pay &amp; Enrol →</a>
       </div>
     </div>
-    <div class="hero-right fade-up delay-2">
-      <div class="stat-card">
-        <div class="stat-num">100+</div>
-        <div class="stat-label">Organisations trained across India & Middle East</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Sectors covered — fintech, healthcare, banking & more</div>
-      </div>
-      <div class="hero-law-note">
-        DPDP Act 2023 · Operationalised Jan 2025 · Every Business Is Affected
-      </div>
+    <div class="h-r">
+      <div class="sc"><div class="sc-n">500+</div><div class="sc-l">Businesses served across India &amp; Saudi Arabia — 15+ years</div></div>
+      <div class="sc"><div class="sc-n">10+</div><div class="sc-l">Sectors covered — fintech, healthcare, banking &amp; more</div></div>
+      <div class="ln">DPDP Act 2023 · Batch Starts 6th May · Limited Seats · ₹6,999 Only</div>
     </div>
   </div>
 </section>
 
 <!-- AUDIENCES -->
 <section id="audiences">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-label">Who This Training Is For</div>
-    <h2 class="section-title">Three Audiences.<br><em>One Urgent Law.</em></h2>
-    <div class="divider"></div>
-    <p class="section-desc">Whether you're entering the workforce, managing a team, or running a compliance function — the DPDP Act creates obligations you cannot ignore.</p>
-    <div class="audiences-grid">
-      <div class="audience-card">
-        <div class="audience-icon">🎓</div>
-        <div class="audience-tag">For Students & Freshers</div>
+  <div class="max">
+    <span class="lbl">Who This Training Is For</span>
+    <h2 class="ttl">Three Audiences.<br><em>One Urgent Law.</em></h2>
+    <div class="div"></div>
+    <p class="desc">Whether entering the workforce, managing a team, or running compliance — the DPDP Act creates obligations you cannot ignore.</p>
+    <div class="a-grid">
+
+      <div class="ac">
+        <div class="ac-ico">🎓</div>
+        <div class="ac-tag">Students &amp; Freshers</div>
         <h3>Be Job-Ready Before the Market Demands It</h3>
-        <p class="audience-hook">"This certification could win you your next job interview."</p>
-        <p>India's digital economy is exploding. Every company handling user data will need DPDP-compliant staff. Freshers who understand data privacy will stand out in campus placements and early career roles.</p>
-        <ul class="audience-outcomes">
-          <li>Understand DPDP Act 2023 in plain English</li>
-          <li>Know your rights as a data principal</li>
+        <p class="ac-hook">"This certification could win you your next job interview."</p>
+        <p>Every company handling user data needs DPDP-compliant staff. Freshers who understand data privacy stand out in placements and early career roles.</p>
+        <ul class="ac-out">
+          <li>Understand DPDP Act 2023 in plain language</li>
+          <li>Know your rights as a Data Principal</li>
           <li>Certificate that adds real weight to your resume</li>
-          <li>Be interview-ready when compliance comes up</li>
+          <li>Gain early edge with DPDP &amp; cybersecurity skills</li>
+          <li>Industry-ready before graduation</li>
         </ul>
+        <a href="BNC_Elevate-_Students.pdf" download class="dl-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Student Brochure
+        </a>
       </div>
-      <div class="audience-card">
-        <div class="audience-icon">💼</div>
-        <div class="audience-tag">For Mid-Level Managers</div>
+
+      <div class="ac">
+        <div class="ac-ico">💼</div>
+        <div class="ac-tag">Working Professionals</div>
         <h3>Your Company Is Already Liable</h3>
-        <p class="audience-hook">"Not knowing is not a defence."</p>
-        <p>HR, IT, Finance, Marketing, Operations, and Legal teams are the first line of accountability. Fines up to ₹250 crore. Vendor disqualification. Audit failures. The deadline is now.</p>
-        <ul class="audience-outcomes">
-          <li>Master Data Fiduciary obligations & consent management</li>
+        <p class="ac-hook">"Not knowing is not a defence."</p>
+        <p>HR, IT, Finance, Marketing, Legal — all are first-line accountability. Fines up to ₹200 crore. Vendor disqualification. Audit failures. Act now.</p>
+        <ul class="ac-out">
+          <li>Master Data Fiduciary obligations &amp; consent</li>
           <li>Function-specific compliance playbook</li>
-          <li>BNC Practitioner Certificate trusted by 100+ organisations</li>
-          <li>Help your company avoid ₹250 crore in penalties</li>
+          <li>BNC Practitioner Certificate — trusted across sectors</li>
+          <li>Move into high-growth data privacy roles</li>
+          <li>Upgrade skills to grow faster in your role</li>
         </ul>
+        <a href="BNC_Elevate-_Professionals.pdf" download class="dl-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Professional Brochure
+        </a>
       </div>
-      <div class="audience-card">
-        <div class="audience-icon">🏢</div>
-        <div class="audience-tag">For Corporate Teams</div>
+
+      <div class="ac">
+        <div class="ac-ico">🏢</div>
+        <div class="ac-tag">Corporate Teams</div>
         <h3>Your Compliance Partner Is Now Your Training Partner</h3>
-        <p class="audience-hook">"Customised. Practical. Legally grounded."</p>
-        <p>BNC has already helped you navigate cybersecurity and data privacy frameworks. Now we bring that same expertise into structured, classroom-style training for your entire team.</p>
-        <ul class="audience-outcomes">
+        <p class="ac-hook">"Customised. Practical. Legally grounded."</p>
+        <p>BNC has navigated cybersecurity and data privacy frameworks for 500+ businesses. Now we bring that expertise into structured training for your entire team.</p>
+        <ul class="ac-out">
           <li>Shared compliance vocabulary across all functions</li>
           <li>Demonstrate proactive DPDP readiness to regulators</li>
-          <li>Reduce internal risk from uninformed data handling</li>
+          <li>Reduce risk from uninformed data handling</li>
           <li>Full team-level DPDP Training Report for audits</li>
+          <li>Private cohorts available at your workplace</li>
         </ul>
+        <a href="BNC_Elevate-_Corporate.pdf" download class="dl-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Corporate Brochure
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="max">
+    <span class="lbl">Fees &amp; Formats</span>
+    <h2 class="ttl">Simple Pricing.<br><em>Maximum Value.</em></h2>
+    <div class="div"></div>
+    <div class="p-grid">
+      <div class="pc">
+        <div class="pc-badge">Virtual</div>
+        <div style="display:flex;align-items:baseline;gap:6px;"><div class="pc-amt">₹6,999</div><span class="pc-str">₹9,299</span></div>
+        <div class="pc-ttl">Virtual Session — 1.5 hrs per Session</div>
+        <ul class="pc-feat">
+          <li>Zoom / MS Teams delivery</li>
+          <li>Morning &amp; Evening slots available</li>
+          <li>7-day recording access</li>
+          <li>Interactive group sessions</li>
+          <li>DPDP Compliance Checklist</li>
+          <li>Consent Notice Drafts</li>
+          <li>Certificate of Completion</li>
+        </ul>
+        <div class="batch-tag">🔴 Batch Starts: 6th May — Limited Seats</div>
+        <br><a href="#payment" class="btn-g" style="margin-top:18px;display:inline-block;">Enrol &amp; Pay Now</a>
+      </div>
+      <div class="pc feat">
+        <div class="pc-badge" style="background:var(--red);color:white;">In-Person</div>
+        <div style="display:flex;align-items:baseline;gap:6px;"><div class="pc-amt">₹6,999</div><span class="pc-str">₹9,299</span></div>
+        <div class="pc-ttl">In-Person Full Day — 6 Hours Immersive</div>
+        <ul class="pc-feat">
+          <li>At your workplace or BNC venue</li>
+          <li>Hands-on practical learning</li>
+          <li>Private cohorts available</li>
+          <li>Data Audit Template + Breach Template</li>
+          <li>90-Day Compliance Roadmap</li>
+          <li>DPIA Template (corporate)</li>
+          <li>Practitioner Certificate</li>
+        </ul>
+        <div class="batch-tag">🔴 25% Early Bird — Act Fast</div>
+        <br><a href="#payment" class="btn-g" style="margin-top:18px;display:inline-block;">Enrol &amp; Pay Now</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FORMATS -->
-<section id="formats">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-label">Training Programmes</div>
-    <h2 class="section-title">Two Formats.<br><em>One Standard of Excellence.</em></h2>
-    <div class="divider"></div>
-    <div class="formats-wrap">
-
-      <!-- FORMAT 1 -->
-      <div class="format-card">
-        <div class="format-badge">Most Popular</div>
-        <div class="format-duration">2 hrs</div>
-        <h3>DPDP Power Session</h3>
-        <p class="format-for">Freshers, students, busy professionals, HR/Marketing/Finance teams who need a fast, actionable introduction.</p>
-        <ul class="module-list">
-          <li>
-            <span class="module-time">0:00–0:20</span>
-            <span class="module-title">Why DPDP? India's Data Privacy Wake-Up Call — real breaches, ₹250Cr penalties</span>
-          </li>
-          <li>
-            <span class="module-time">0:20–0:45</span>
-            <span class="module-title">Key Definitions: Data Principal, Fiduciary, Consent Manager with real-life examples</span>
-          </li>
-          <li>
-            <span class="module-time">0:45–1:05</span>
-            <span class="module-title">Consent is King: How businesses must collect, store & manage consent</span>
-          </li>
-          <li>
-            <span class="module-time">1:05–1:25</span>
-            <span class="module-title">What Your Role Needs to Do: Practical dos and don'ts by function</span>
-          </li>
-          <li>
-            <span class="module-time">1:25–1:50</span>
-            <span class="module-title">DPDP in Action: 15-min case simulation — "What would YOU do?"</span>
-          </li>
-          <li>
-            <span class="module-time">1:50–2:00</span>
-            <span class="module-title">Q&A + Certificate Distribution</span>
-          </li>
-        </ul>
-        <div class="deliverables">
-          <p class="deliverables-label">Deliverables Included</p>
-          <div class="deliverables-list">
-            <span class="del-tag">Digital Certificate</span>
-            <span class="del-tag">DPDP Cheat Sheet</span>
-            <span class="del-tag">BNC Resource Vault</span>
-          </div>
-        </div>
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="max">
+    <div style="text-align:center;">
+      <span class="lbl" style="display:block;">Secure Your Seat</span>
+      <h2 class="ttl" style="max-width:540px;margin:0 auto 14px;">Pay &amp; Confirm<br><em>Your Registration</em></h2>
+      <div class="div" style="margin:16px auto;"></div>
+      <p class="desc" style="margin:0 auto;">Scan the QR, pay ₹6,999, and send your screenshot on WhatsApp to confirm your seat instantly.</p>
+    </div>
+    <div class="pay-wrap">
+      <div class="pay-steps">
+        <div class="ps"><div class="psn">1</div><div class="pst"><strong>Scan the QR Code</strong> below using GPay, PhonePe, Paytm, BHIM, or any UPI app. Pay ₹6,999 to <strong>BNC SERVICES</strong>.</div></div>
+        <div class="ps"><div class="psn">2</div><div class="pst"><strong>Take a screenshot</strong> of your payment confirmation with the transaction ID clearly visible.</div></div>
+        <div class="ps"><div class="psn">3</div><div class="pst"><strong>Send on WhatsApp</strong> using the button below with your name and preferred training format. Seat confirmed within 2 hours.</div></div>
       </div>
+      <div class="qr-fr">
+        <img src="payment.jpeg" alt="BNC Services UPI QR — 9810575613@kotak">
+      </div>
+      <div class="upi">UPI ID: 9810575613@kotak &nbsp;|&nbsp; BNC SERVICES</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">GPay · PhonePe · Paytm · BHIM · Any UPI App</p>
+      <a href="https://wa.me/919810575613?text=Hi%20BNC%20Elevate!%20I%20have%20completed%20the%20payment%20for%20the%20DPDP%20Act%20Training.%20Attaching%20my%20payment%20screenshot.%0AMy%20Name%3A%20%0ATraining%20Format%3A%20" target="_blank" class="wa-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+        Send Payment Screenshot on WhatsApp
+      </a>
+      <p class="pay-note">Our team confirms your seat within 2 hours of receiving your screenshot.<br>
+        Queries: <strong style="color:var(--gold-l)">+91 9810 575613</strong></p>
+    </div>
+  </div>
+</section>
 
-      <!-- FORMAT 2 -->
-      <div class="format-card">
-        <div class="format-badge">Practitioner Grade</div>
-        <div class="format-duration">1 day</div>
-        <h3>DPDP Practitioner Workshop</h3>
-        <p class="format-for">Mid-level managers, compliance officers, legal/HR/IT teams and corporate batches seeking deep practitioner-grade training.</p>
-        <ul class="module-list">
-          <li>
-            <span class="module-time">9:00–10:30</span>
-            <span class="module-title">DPDP Act 2023 — The Full Legal Picture: origins, enforcement, applicability</span>
-          </li>
-          <li>
-            <span class="module-time">10:30–11:30</span>
-            <span class="module-title">Data Principals & Fiduciaries — Map your organisation's role</span>
-          </li>
-          <li>
-            <span class="module-time">11:30–12:30</span>
-            <span class="module-title">Consent Architecture Deep Dive — Build a compliant workflow</span>
-          </li>
-          <li>
-            <span class="module-time">1:15–2:30</span>
-            <span class="module-title">DPDP Across Functions — HR, Marketing, Finance, IT, Legal playbooks</span>
-          </li>
-          <li>
-            <span class="module-time">2:30–3:30</span>
-            <span class="module-title">Data Protection Impact Assessment — Hands-on DPIA exercise</span>
-          </li>
-          <li>
-            <span class="module-time">4:30–5:00</span>
-            <span class="module-title">Capstone: DPDP Readiness Score + Certificate Distribution</span>
-          </li>
-        </ul>
-        <div class="deliverables">
-          <p class="deliverables-label">Deliverables Included</p>
-          <div class="deliverables-list">
-            <span class="del-tag">Printed Workbook</span>
-            <span class="del-tag">Compliance Toolkit</span>
-            <span class="del-tag">DPIA Template</span>
-            <span class="del-tag">Practitioner Certificate</span>
-            <span class="del-tag">30-Day Support</span>
-            <span class="del-tag">Alumni Network</span>
-          </div>
-        </div>
+<!-- CURRICULUM -->
+<section id="curriculum">
+  <div class="max">
+    <span class="lbl">Programme Curriculum</span>
+    <h2 class="ttl">6 Core Modules.<br><em>Built for Practitioners.</em></h2>
+    <div class="div"></div>
+    <p class="desc">Not legal theory. A practitioner-led session — understand the DPDP Act, map your exposure, and start your compliance framework before you leave the room.</p>
+    <div class="m-grid">
+      <div class="mc"><div class="mc-n">01</div><div class="mc-t">DPDP Foundations</div><div class="mc-d">Key definitions, scope of the Act, applicability to your business, and Data Protection Board powers.</div></div>
+      <div class="mc"><div class="mc-n">02</div><div class="mc-t">Consent Framework</div><div class="mc-d">Valid consent, consent notices, deemed consent — WhatsApp, email lists, and CRMs are all in scope.</div></div>
+      <div class="mc"><div class="mc-n">03</div><div class="mc-t">Data Principal Rights</div><div class="mc-d">Access, correction, erasure rights. Your business must respond within 72 hours — or face penalties.</div></div>
+      <div class="mc"><div class="mc-n">04</div><div class="mc-t">Breach Notification</div><div class="mc-d">Definition of a breach, mandatory reporting timelines to the Data Protection Board, and response planning.</div></div>
+      <div class="mc"><div class="mc-n">05</div><div class="mc-t">Third-Party &amp; Cross-Border</div><div class="mc-d">Vendor obligations, data transfer risk, cross-border data processing requirements under DPDPA.</div></div>
+      <div class="mc"><div class="mc-n">06</div><div class="mc-t">90-Day Compliance Roadmap</div><div class="mc-d">Conduct a readiness audit, prioritise actions, and walk out with a personalised 90-day compliance plan.</div></div>
+    </div>
+    <div style="margin-top:28px;padding:22px;background:var(--card);border-left:3px solid var(--gold);">
+      <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Included With Every Session</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">DPDP Compliance Checklist</span>
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">Data Audit Template</span>
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">Consent Notice Drafts</span>
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">Breach Notification Template</span>
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">90-Day Roadmap</span>
+        <span style="font-size:12px;color:var(--gold-l);border:1px solid rgba(184,149,42,.25);padding:4px 11px;background:rgba(184,149,42,.05);">Certificate of Completion</span>
       </div>
     </div>
   </div>
@@ -620,44 +371,32 @@
 
 <!-- WHY BNC -->
 <section id="why">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="why-grid">
+  <div class="max">
+    <div class="w-grid">
       <div>
-        <div class="section-label">Why BNC Data Privacy Labs</div>
-        <h2 class="section-title">India's Trusted<br><em>Compliance Partner</em></h2>
-        <div class="divider"></div>
-        <p class="section-desc">Headquartered in New Delhi with presence in the UK and Middle East. Our team includes CISA, CISM, ISO 27001 Lead Auditors, GDPR specialists, and former regulatory authority professionals.</p>
-        <ul class="why-points">
-          <li>Trusted by HeroFinCorp, Indifi, NSG and 100+ organisations across India & the Middle East</li>
-          <li>Certified trainers: CISA, CISM, ISO 27001, GDPR specialists on faculty</li>
-          <li>Training available in-person or virtual (Zoom / MS Teams)</li>
-          <li>Corporate batch customisation mapped to your industry and data workflows</li>
-          <li>30-day post-training email support included</li>
+        <span class="lbl">Why Elevate by BNC</span>
+        <h2 class="ttl">We Don't Teach Theory.<br><em>We Transfer Expertise.</em></h2>
+        <div class="div"></div>
+        <p class="desc">Born from BNC Global's 15+ years serving 500+ businesses across India and Saudi Arabia. Faculty teach from boardrooms, not textbooks.</p>
+        <ul class="w-pts">
+          <li>Practitioners, Not Professors — faculty teach from real experience</li>
+          <li>AI-Integrated Learning — built for today's regulatory environment</li>
+          <li>Success measured by execution, not feedback scores</li>
+          <li>Virtual (Zoom/Teams) &amp; In-Person at your workplace</li>
+          <li>Private cohorts for corporate batches</li>
           <li>Certificate usable in regulatory audit documentation</li>
         </ul>
+        <div class="qb">
+          <p>"The DPDP Act is not a future event. Organisations that get ahead of this will benefit from smoother audits, stronger vendor relationships, and lower legal risk."</p>
+          <span>— Elevate by BNC Global</span>
+        </div>
       </div>
       <div>
-        <div class="why-stats">
-          <div class="why-stat">
-            <div class="why-stat-num">100+</div>
-            <div class="why-stat-label">Organisations Trained</div>
-          </div>
-          <div class="why-stat">
-            <div class="why-stat-num">10+</div>
-            <div class="why-stat-label">Sectors Covered</div>
-          </div>
-          <div class="why-stat">
-            <div class="why-stat-num">3</div>
-            <div class="why-stat-label">Countries — India, UK, Middle East</div>
-          </div>
-          <div class="why-stat">
-            <div class="why-stat-num">₹250Cr</div>
-            <div class="why-stat-label">Maximum Fine — Know Your Risk</div>
-          </div>
-        </div>
-        <div style="margin-top:24px; padding:24px; background:var(--card-bg); border-left:3px solid var(--gold);">
-          <p style="font-size:13px; color:var(--silver-light); line-height:1.75; font-style:italic;">"The DPDP Act is not a future event. The rules are active. Organisations that get ahead of this will benefit from smoother audits, stronger vendor relationships, and lower legal risk."</p>
-          <p style="font-size:11px; color:var(--gold); margin-top:12px; font-family:'Syne',sans-serif; letter-spacing:0.1em; text-transform:uppercase;">— BNC Data Privacy Labs</p>
+        <div class="w-stats">
+          <div class="ws"><div class="ws-n">500+</div><div class="ws-l">Businesses Served</div></div>
+          <div class="ws"><div class="ws-n">15+</div><div class="ws-l">Years of Expertise</div></div>
+          <div class="ws"><div class="ws-n">10+</div><div class="ws-l">Sectors Covered</div></div>
+          <div class="ws"><div class="ws-n">₹200Cr</div><div class="ws-l">Max Penalty — Know Your Risk</div></div>
         </div>
       </div>
     </div>
@@ -666,158 +405,116 @@
 
 <!-- REGISTER -->
 <section id="register">
-  <div style="max-width:1200px; margin:0 auto; text-align:center;">
-    <div class="section-label" style="justify-content:center; display:block;">Register Your Interest</div>
-    <h2 class="section-title" style="max-width:600px; margin:0 auto 16px;">Secure Your Seat.<br><em>Before the Next Batch Fills.</em></h2>
-    <div class="divider" style="margin:20px auto;"></div>
-    <p class="section-desc" style="margin:0 auto;">Fill in your details and our team will reach out with batch dates, pricing, and format options. Corporate enquiries welcome.</p>
-
-    <div class="form-wrap">
-      <div class="form-grid" id="registration-form">
-        <div class="form-group">
-          <label for="name">Full Name *</label>
-          <input type="text" id="name" placeholder="Your full name" required>
-        </div>
-        <div class="form-group">
-          <label for="contact">Contact Number *</label>
-          <input type="tel" id="contact" placeholder="+91 98765 43210" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" placeholder="you@company.com" required>
-        </div>
-        <div class="form-group">
-          <label for="occupation">Occupation *</label>
-          <input type="text" id="occupation" placeholder="e.g. HR Manager, Student, CTO">
-        </div>
-        <div class="form-group full">
-          <label for="address">City / Location *</label>
-          <input type="text" id="address" placeholder="Your city or location">
-        </div>
-        <div class="form-group full">
+  <div class="max" style="text-align:center;">
+    <span class="lbl" style="display:block;">Register Your Interest</span>
+    <h2 class="ttl" style="max-width:520px;margin:0 auto 12px;">Secure Your Seat.<br><em>Before the Batch Fills.</em></h2>
+    <div class="div" style="margin:16px auto;"></div>
+    <p class="desc" style="margin:0 auto;">Fill your details and our team will reach out with batch dates and confirmation. Corporate enquiries welcome.</p>
+    <div class="f-wrap">
+      <div class="f-grid">
+        <div class="fg"><label for="name">Full Name *</label><input type="text" id="name" placeholder="Your full name"></div>
+        <div class="fg"><label for="contact">Contact Number *</label><input type="tel" id="contact" placeholder="+91 98765 43210"></div>
+        <div class="fg"><label for="occupation">Occupation *</label><input type="text" id="occupation" placeholder="e.g. HR Manager, Student, CTO"></div>
+        <div class="fg"><label for="address">City / Location</label><input type="text" id="address" placeholder="Your city"></div>
+        <div class="fg full">
           <label for="training">Training Type *</label>
           <select id="training">
             <option value="" disabled selected>Select a programme</option>
-            <option value="2-Hour DPDP Power Session">2-Hour DPDP Power Session (Freshers & Professionals)</option>
-            <option value="1-Day DPDP Practitioner Workshop">1-Day DPDP Practitioner Workshop (Managers & Teams)</option>
-            <option value="Corporate Batch - Custom Quote">Corporate Batch — Custom Quote</option>
-            <option value="Not Sure Yet - Need More Info">Not Sure Yet — Need More Info</option>
+            <option value="Virtual - Students/Freshers">Virtual Session — Students / Freshers</option>
+            <option value="Virtual - Working Professionals">Virtual Session — Working Professionals</option>
+            <option value="In-Person - Corporate Team">In-Person Full Day — Corporate Team</option>
+            <option value="Corporate Batch - Custom Quote">Corporate Batch — Request Custom Quote</option>
+            <option value="Need More Info">Not Sure Yet — Need More Info</option>
           </select>
         </div>
       </div>
-
-      <button class="form-submit" id="submit-btn" onclick="submitForm()">
-        Submit Registration →
-      </button>
-      <div id="form-status"></div>
-      <p class="form-note">Your details will be shared with the BNC Elevate team only. No spam, ever.<br>
-        For corporate enquiries: <a href="/cdn-cgi/l/email-protection#186b6d7575716c587a767b7c796c79686a716e797b61367b7775" style="color:var(--gold)"><span class="__cf_email__" data-cfemail="087b7d6565617c486a666b6c697c69787a617e696b71266b6765">[email&#160;protected]</span></a> | +91 9810 575613</p>
+      <button class="f-btn" id="submit-btn" onclick="submitForm()">Submit Registration →</button>
+      <div id="fst"></div>
+      <p class="f-note">For corporate enquiries: <strong style="color:var(--gold-l)">+91 9810 575613</strong></p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid" style="max-width:1200px; margin:0 auto;">
+  <div class="ft-g">
     <div>
-      <img src="Untitled_Design_-_1.png" alt="Elevate by BNC" onerror="this.style.display='none'">
-      <p class="footer-desc">BNC Data Privacy Labs | Elevate by BnC Global — India's trusted DPDP Act training partner. Headquartered in New Delhi with presence in the UK and Middle East.</p>
-      <div class="footer-contact">
+      <img src="logo.webp" alt="Elevate by BNC" class="fl">
+      <p class="fd">BNC Data Privacy Labs | Elevate by BnC Global — India's trusted DPDP Act training partner. New Delhi, UK &amp; Middle East.</p>
+      <div class="fc-c">
         <a href="tel:+919810575613">+91 9810 575613</a>
-        <a href="/cdn-cgi/l/email-protection#c2b1b7afafabb682a0aca1a6a3b6a3b2b0abb4a3a1bbeca1adaf"><span class="__cf_email__" data-cfemail="85f6f0e8e8ecf1c5e7ebe6e1e4f1e4f5f7ecf3e4e6fcabe6eae8">[email&#160;protected]</span></a>
         <a href="#">208, DDA 5, Janakpuri District Centre, New Delhi</a>
+        <a href="https://elevate-by-bnc.vercel.app" target="_blank">elevate-by-bnc.vercel.app</a>
       </div>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/elevatebybnc/" target="_blank" class="social-link" title="Instagram">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/elevatebybnc/" target="_blank" class="social-link" title="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@Elevate-byBnC" target="_blank" class="social-link" title="YouTube">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-        </a>
+      <div class="soc">
+        <a href="https://www.instagram.com/elevatebybnc/" target="_blank" class="sl2" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.linkedin.com/company/elevatebybnc/" target="_blank" class="sl2" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.youtube.com/@Elevate-byBnC" target="_blank" class="sl2" title="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://wa.me/919810575613" target="_blank" class="sl2" title="WhatsApp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg></a>
       </div>
     </div>
-    <div class="footer-col">
+    <div class="fc">
       <h4>Programmes</h4>
       <ul>
-        <li><a href="#formats">2-Hour Power Session</a></li>
-        <li><a href="#formats">1-Day Practitioner Workshop</a></li>
-        <li><a href="#register">Corporate Batches</a></li>
-        <li><a href="#register">Custom Quote</a></li>
+        <li><a href="#audiences">For Students &amp; Freshers</a></li>
+        <li><a href="#audiences">For Professionals</a></li>
+        <li><a href="#audiences">For Corporate Teams</a></li>
+        <li><a href="#pricing">View Pricing</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="fc">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="#audiences">Who It's For</a></li>
+        <li><a href="#curriculum">Curriculum</a></li>
         <li><a href="#why">Why BNC</a></li>
-        <li><a href="#register">Register Now</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#34474159595d4074565a575055405544465d4255574d1a575b59">Contact Us</a></li>
-        <li><a href="https://www.bncdataprivacy.com" target="_blank">www.bncdataprivacy.com</a></li>
+        <li><a href="#payment">Pay Now</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="https://www.bncdataprivacy.com" target="_blank">bncdataprivacy.com</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom" style="max-width:1200px; margin:0 auto;">
+  <div class="fb">
     <p>© 2025 BNC Data Privacy Labs | Elevate by BnC Global. All rights reserved.</p>
-    <p style="color:var(--gold); font-size:11px; font-family:'Syne',sans-serif; letter-spacing:0.1em; text-transform:uppercase;">Training | Mentoring | Placement</p>
+    <p style="color:var(--gold);font-size:10px;font-family:'Syne',sans-serif;letter-spacing:.1em;text-transform:uppercase;">Training | Mentoring | Placement</p>
   </div>
 </footer>
 
 <script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7m9zj-_l0bc2_A8r3jZ7Vzt5lRUVyH6WztNZxfB8VmiTCY4CrUbfYylWaGohQyWF51w/exec";
+// Show mobile pay button on small screens
+if(window.innerWidth<=900) document.getElementById('mob-pay').style.display='inline-block';
+
+const SCRIPT_URL = "YOUR_SCRIPT_URL_HERE";
 
 async function submitForm() {
-  const btn    = document.getElementById("submit-btn");
-  const status = document.getElementById("form-status");
-
-  const fields = {
+  const btn = document.getElementById("submit-btn");
+  const st  = document.getElementById("fst");
+  const f = {
     name:       document.getElementById("name").value.trim(),
     contact:    document.getElementById("contact").value.trim(),
-    email:      document.getElementById("email").value.trim(),
-    address:    document.getElementById("address").value.trim(),
     occupation: document.getElementById("occupation").value.trim(),
+    address:    document.getElementById("address").value.trim(),
     training:   document.getElementById("training").value
   };
-
-  if (!fields.name || !fields.contact || !fields.email || !fields.training) {
-    status.innerHTML = "<span class=\"status-error\">Please fill in all required fields *</span>";
-    return;
+  if (!f.name || !f.contact || !f.training) {
+    st.innerHTML='<span class="se">⚠ Please fill in all required fields *</span>'; return;
   }
-
-  if (APPS_SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
-    status.innerHTML = "<span class=\"status-error\">Sheet not connected yet. See setup guide below.</span>";
-    return;
+  if (SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
+    st.innerHTML='<span class="se">⚠ Google Sheet not connected yet.</span>'; return;
   }
-
-  btn.disabled = true;
-  btn.textContent = "Sending…";
-  status.innerHTML = "<span class=\"status-loading\">Submitting your registration…</span>";
-
-  const body = Object.entries(fields)
-    .map(([k,v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
-    .join("&");
-
+  btn.disabled=true; btn.textContent="Sending…";
+  st.innerHTML='<span class="sl">⏳ Submitting…</span>';
+  const body=Object.entries(f).map(([k,v])=>encodeURIComponent(k)+"="+encodeURIComponent(v)).join("&");
   try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body
-    });
-    status.innerHTML = "<span class=\"status-success\">Registration received! Our team will contact you shortly.</span>";
-    btn.textContent  = "Registration Sent ✓";
-    btn.style.background = "#4caf50";
-    ["name","contact","email","address","occupation"].forEach(id => document.getElementById(id).value = "");
-    document.getElementById("training").value = "";
-  } catch (err) {
-    status.innerHTML = "<span class=\"status-error\">Error. Email us: summit@bncdataprivacy.com</span>";
-    btn.disabled = false;
-    btn.textContent = "Submit Registration →";
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body});
+    st.innerHTML='<span class="ss">✓ Registration received! We will contact you shortly.</span>';
+    btn.textContent="Sent ✓"; btn.style.background="#4caf50";
+    ["name","contact","occupation","address"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("training").value="";
+  } catch(e) {
+    st.innerHTML='<span class="se">Error — call us: +91 9810 575613</span>';
+    btn.disabled=false; btn.textContent="Submit Registration →";
   }
 }
 </script>
-
 </body>
 </html>
