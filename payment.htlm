@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment | Elevate by BNC</title>
+<link rel="icon" type="image/webp" href="logo.webp?v=20260424">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#000;--off:#0a0a0a;--card:#141414;--gold:#b8952a;--gold-l:#d4af5a;--silver:#b0bec5;--white:#fff;--muted:#888;--border:#222;--green:#25D366}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(184,149,42,.08) 0%,transparent 70%),var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+  a{text-decoration:none}
+  nav{position:sticky;top:0;z-index:10;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,149,42,.15)}
+  .nav-logo img{height:46px;width:auto;display:block}
+  .nav-links{display:flex;align-items:center;gap:22px;list-style:none}
+  .nav-links a{color:var(--silver);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .nav-links a:hover{color:var(--gold-l)}
+  .nav-cta{display:inline-block;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px}
+  .nav-cta:hover{background:var(--gold-l)}
+  main{padding:72px 5% 90px}
+  .shell{max-width:1180px;margin:0 auto}
+  .hero{text-align:center;max-width:760px;margin:0 auto 44px}
+  .eyebrow{display:inline-block;margin-bottom:16px;color:var(--gold);font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+  h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);font-weight:600;line-height:1.04;margin-bottom:18px}
+  h1 em{color:var(--gold);font-style:italic}
+  .lead{font-size:15px;color:var(--silver);line-height:1.8;max-width:640px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+  .card{background:var(--card);border:1px solid var(--border);padding:32px}
+  .card h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:10px}
+  .card p{font-size:14px;color:var(--silver);line-height:1.7}
+  .qr-card{text-align:center}
+  .qr-shell{display:inline-block;background:#fff;border-radius:22px;padding:18px;border:4px solid rgba(184,149,42,.9);margin-bottom:20px}
+  .qr-shell img{display:block;width:min(100%,340px);height:auto}
+  .upi{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:.08em;color:var(--gold-l);margin-bottom:8px}
+  .muted{font-size:12px;color:var(--muted)}
+  .steps{margin-top:24px}
+  .step{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
+  .step-num{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .step-text{font-size:13px;color:var(--silver);line-height:1.7}
+  .step-text strong{color:var(--white)}
+  .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+  .btn-gold{display:inline-block;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:14px 22px}
+  .btn-gold:hover{background:var(--gold-l)}
+  .btn-dark{display:inline-block;border:1px solid rgba(184,149,42,.3);color:var(--silver);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 22px}
+  .btn-dark:hover{border-color:var(--gold);color:var(--gold)}
+  .whatsapp{background:var(--green);color:#fff}
+  .whatsapp:hover{background:#1ebe5d}
+  .note{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.8}
+  .brochures{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .brochures a{display:inline-block;padding:10px 14px;background:rgba(184,149,42,.08);border:1px solid rgba(184,149,42,.28);color:var(--gold-l);font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .brochures a:hover{border-color:var(--gold);color:var(--gold)}
+  .footer-note{margin-top:36px;text-align:center;font-size:12px;color:var(--muted)}
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .grid{grid-template-columns:1fr}
+    main{padding-top:52px}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp?v=20260424" alt="Elevate by BNC"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#audiences">Brochures</a></li>
+    <li><a href="index.html#register">Register</a></li>
+    <li><a href="https://wa.me/919810575613" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+  </ul>
+  <a href="index.html#register" class="nav-cta">Register</a>
+</nav>
+
+<main>
+  <div class="shell">
+    <div class="hero">
+      <span class="eyebrow">Payment and Registration</span>
+      <h1>Pay, share the screenshot, and <em>confirm your seat.</em></h1>
+      <p class="lead">Scan the QR code below using any UPI app. Once the payment is done, send your payment screenshot on WhatsApp with your name and selected programme to complete registration.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card qr-card">
+        <div class="qr-shell">
+          <img src="payment.jpeg" alt="BNC Services UPI QR code">
+        </div>
+        <div class="upi">UPI ID: 9810575613@kotak</div>
+        <p>Account name: <strong style="color:var(--white);">BNC SERVICES</strong></p>
+        <p class="muted" style="margin-top:10px;">Supported apps: GPay, PhonePe, Paytm, BHIM, and any UPI app.</p>
+        <div class="actions" style="justify-content:center;">
+          <a href="payment.jpeg" download class="btn-dark">Download QR</a>
+          <a href="index.html#register" class="btn-dark">Open Registration Form</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Next steps</h2>
+        <p>Follow these quick steps to finish payment and registration without waiting for a callback.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Scan and pay</strong> using the QR code on this page. Pay the applicable programme fee through your preferred UPI app.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Take a screenshot</strong> after the payment succeeds. Keep the transaction ID visible in the screenshot.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Share it on WhatsApp</strong> with your name and chosen programme so the BNC team can confirm your seat.</div>
+          </div>
+        </div>
+        <div class="actions">
+          <a href="https://wa.me/919810575613?text=Hi%20BNC%20Elevate!%20I%20have%20completed%20the%20payment%20for%20the%20programme.%20Attaching%20my%20payment%20screenshot.%0AMy%20Name%3A%20%0AProgramme%3A%20" target="_blank" rel="noopener noreferrer" class="btn-gold whatsapp">Share Payment Screenshot</a>
+          <a href="index.html" class="btn-gold">Back to Website</a>
+        </div>
+        <p class="note">Need help? Call or WhatsApp <strong style="color:var(--gold-l);">+91 9810 575613</strong>.</p>
+
+        <div class="brochures">
+          <a href="BNC%20Elevate-%20Students.pdf" download>Student Brochure</a>
+          <a href="BNC%20Elevate-%20Professionals.pdf" download>Professional Brochure</a>
+          <a href="BNC%20Elevate-%20Corporate.pdf" download>Corporate Brochure</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">Elevate by BNC | Training | Mentoring | Placement</p>
+  </div>
+</main>
+</body>
+</html>
